@@ -67,8 +67,8 @@ group :development do
 end
 
 group :test do
-  gem 'capybara'
-  gem 'simplecov'
-  gem 'codecov', require: false
+  gem "capybara"
+  gem "simplecov"
+  gem "codecov", require: false
 end
 
