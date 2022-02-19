@@ -24,7 +24,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      
+
       - name: Setup Ruby and install gems
         uses: ruby/setup-ruby@v1
         with:
@@ -46,6 +46,11 @@ jobs:
           bundle exec rake db:schema:load
 
       - name: Run RSpec
+        env:
+          RAILS_ENV: test
+          PGUSER: postgres
+          PGPASSWORD: postgres
+          PGHOST: localhost
         run: bundle exec rspec spec
 
       - name: Codecov
