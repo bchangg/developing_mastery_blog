@@ -4,6 +4,7 @@ class ArticlesController < ApplicationController
   end
 
   def new
+    @article = Article.new
   end
 
   def show
@@ -14,6 +15,12 @@ class ArticlesController < ApplicationController
   end
 
   def create
+    @article = Article.new(article_params)
+    if @article.save
+      redirect_to articles_path
+    else
+      render 'new', status: :unprocessable_entity
+    end
   end
 
   def update
