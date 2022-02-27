@@ -1,0 +1,20 @@
+<%= form_with model: model, local: true, class: 'new-article' do |form| %>
+  <h1 class='title'><%= title %></h1>
+  
+  <% if model.errors.any? %>
+    <ul>
+    <% model.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  <% end %>
+
+  <%= form.label :title, 'Title' %>
+  <%= form.text_field :title %>
+  
+  <br>
+  <%= form.label :body, 'Body' %>
+  <%= form.text_area :body, size: "60x10" %>
+  <br>
+  <%= form.submit class: 'submit-button' %>
+<% end %>
