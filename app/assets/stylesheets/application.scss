@@ -37,7 +37,9 @@ body {
     section {
       display: flex;
       flex-direction: column;
-      padding: 0 1vw;
+      align-self: center;
+      word-wrap: break-word;
+      width: 80%;
     }
 
     form {
