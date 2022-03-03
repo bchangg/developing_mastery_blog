@@ -1,5 +1,3 @@
-require 'faker'
-
 require 'capybara/rspec'
 
 require 'simplecov'
