@@ -20,7 +20,7 @@ class ArticlesController < ApplicationController
     if @article.save
       redirect_to articles_path
     else
-      render 'new', status: :unprocessable_entity
+      render :new, status: :unprocessable_entity
     end
   end
 
