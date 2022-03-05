@@ -7,6 +7,8 @@ on:
 
 jobs:
   tests:
+    env:
+      CI: "true"
     name: RSpec Tests
     runs-on: ubuntu-latest
     services:
