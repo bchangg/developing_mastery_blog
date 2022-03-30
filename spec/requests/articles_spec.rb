@@ -39,6 +39,7 @@ describe 'Articles', type: :request do
         expect(response).to have_http_status(302)
       end
     end
+
     context 'with invalid params' do
       it 'should not increase Article.count' do
         expect{
@@ -50,6 +51,7 @@ describe 'Articles', type: :request do
           })
         }.to change{ Article.count }.by(0)
       end
+
       it 'should respond with a 422' do
         post(articles_path, params: {
           article: {
@@ -107,32 +109,29 @@ describe 'Articles', type: :request do
 
   describe 'PUT /articles/:id' do # update
     context 'with valid params' do
-      it 'updates the article in the database' do
-        article = Article.create(
+      before(:each) do
+        @article = Article.create(
           title: 'Initial',
           body: 'Initial body'
         )
+      end
 
-        expect(article.title).to eq('Initial')
+      it 'updates the article in the database' do
+        expect(@article.title).to eq('Initial')
 
-        put(article_path(article), params: {
+        put(article_path(@article), params: {
           article: {
             title: 'Test',
             body: 'Test body'
           }
         })
 
-        expect(article.reload.title).to eq('Test')
-        expect(article.reload.body).to eq('Test body')
+        expect(@article.reload.title).to eq('Test')
+        expect(@article.reload.body).to eq('Test body')
       end
 
       it 'responds with a 302' do
-        article = Article.create(
-          title: 'Initial',
-          body: 'Initial body'
-        )
-
-        put(article_path(article), params: {
+        put(article_path(@article), params: {
           article: {
             title: 'Test',
             body: 'Test body'
@@ -143,52 +142,47 @@ describe 'Articles', type: :request do
       end
     end
     context 'with invalid params' do
-      it 'does not update the article' do
-        article = Article.create(
+      before(:each) do
+        @article = Article.create(
           title: 'Initial',
           body: Faker::Lorem.paragraph
         )
 
-        put(article_path(article), params: {
+        put(article_path(@article), params: {
           article: {
             title: nil,
             body: nil
           }
         })
 
-        expect(article.reload.title).to eq('Initial')
+      end
+      it 'does not update the article' do
+        expect(@article.reload.title).to eq('Initial')
       end
       it 'responds with 422' do
-        article = Article.create(
-          title: 'Initial',
-          body: Faker::Lorem.paragraph
-        )
-
-        put(article_path(article), params: {
-          article: {
-            title: nil,
-            body: nil
-          }
-        })
-
         expect(response).to have_http_status(422)
       end
     end
   end
 
   describe 'DELETE /articles/:id' do # delete
-    it 'deletes the article from the database' do
-      article = Article.create(
+    before(:each) do
+      @article = Article.create(
         title: 'Initial',
         body: Faker::Lorem.paragraph
       )
 
-      delete article_path(article)
+      delete(article_path(@article))
+    end
 
+    it 'deletes the article from the database' do
       expect{
-        Article.find(article.id)
+        Article.find(@article.id)
       }.to raise_exception(ActiveRecord::RecordNotFound)
     end
-    it 'responds with a 302'
+
+    it 'responds with a 302' do
+      expect(response).to have_http_status(302)
+    end
   end
 end
