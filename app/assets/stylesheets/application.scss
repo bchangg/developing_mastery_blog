@@ -12,4 +12,45 @@
  *
  *= require_tree .
  *= require_self
- */
+*/
+
+body {
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+
+  nav.top-nav {
+    height: 2em;
+  }
+
+  main {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    width: 85vw;
+
+    .title {
+      align-self: center;
+      font-size: 3em;
+    }
+
+    section {
+      display: flex;
+      flex-direction: column;
+      align-self: center;
+      word-wrap: break-word;
+      width: 80%;
+    }
+
+    form {
+      display: flex;
+      align-self: center;
+      flex-direction: column;
+      width: 80%;
+
+      .submit-button {
+        align-self: flex-start;
+      }
+    }
+  }
+}

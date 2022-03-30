@@ -11,6 +11,13 @@
   </head>
 
   <body>
-    <%= yield %>
+    <nav class="top-nav">
+      <%= link_to 'All Articles', articles_path, class: 'navItem' %>
+      &nbsp|&nbsp
+      <%= link_to 'New Article', new_article_path, class: 'navItem' %>
+    </nav>
+    <main>
+      <%= yield %>
+    </main>
   </body>
 </html>

@@ -1,1 +1,9 @@
-Articles#show Page
+<section>
+  <h1 class='title'><%= @article.title %></h1>
+  <p><%= @article.body %></p>
+  <br>
+  <div>
+    <%= link_to 'Edit', edit_article_path(@article) %>
+    <%= link_to 'Delete', article_path(@article), data: { 'turbo-method': :delete, 'turbo-confirm': 'Are you sure?' } %>
+  </div>
+</section>

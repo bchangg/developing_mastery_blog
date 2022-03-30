@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
-  def hello
+  def landing
+    redirect_to articles_path
   end
 end
